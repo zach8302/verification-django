@@ -3,7 +3,12 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
+import datetime
 
+class AuthBlob(models.Model):
+    value = models.CharField(max_length=100, default="")
+    created = models.DateTimeField(default=timezone.now())
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -43,10 +48,11 @@ class User(AbstractUser):
 
     username = None
     email = models.EmailField(_('email address'), unique=True)
-    date_verified = models.DateTimeField(null=True)
+    date_verified = models.DateTimeField(default=timezone.datetime.date(datetime.datetime(2000, 1, 1)))
     verified = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
+
 
     objects = UserManager()
