@@ -6,7 +6,7 @@ from .stripe_views import VerificationSessionView
 urlpatterns = [
     path('authenticate', AuthenticateView.as_view()),
     path('verify', VerifyView.as_view()),
-    path('is_authenticated', IsAuthenticatedView.as_view()),
+    path('is-authenticated', IsAuthenticatedView.as_view()),
     path('me', MeView.as_view()),
     path('create-verification-session', VerificationSessionView.as_view())
     ]

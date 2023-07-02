@@ -26,5 +26,7 @@ class VerificationSessionView(APIView):
         )
 
         # Return only the client secret to the frontend
-        client_secret = verification_session.client_secret
-        return Response({'client_secret' : client_secret}, status=status.HTTP_200_OK)
+        url = verification_session.url
+
+
+        return Response({'url' : url}, status=status.HTTP_200_OK)
