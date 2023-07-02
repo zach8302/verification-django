@@ -15,6 +15,7 @@ import os
 import sys
 import dj_database_url
 from django.core.management.utils import get_random_secret_key
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,6 +37,17 @@ if os.getenv("DATABASE_URL", None) is None:
 else:
     DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
+JWT_AUTH = {
+    # how long the original token is valid for
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=2),
+
+    # allow refreshing of tokens
+    'JWT_ALLOW_REFRESH': True,
+
+    # this is the maximum time AFTER the token was issued that
+    # it can be refreshed.  exprired tokens can't be refreshed.
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+}
 
 # Application definition
 
