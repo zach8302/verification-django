@@ -39,7 +39,7 @@ class VerificationWebhookView(APIView):
     def post(self, request, format=None):
         signature = request.headers.get('stripe-signature')
         payload = request.data
-        endpoint_secret = "we_1NPVtfENXUDWXy01DGHsenD4"
+        endpoint_secret = "whsec_zIdspvETnidcC0cgMzKUj3oaW12jyxvq"
 
         # Verify webhook signature and extract the event.
         # See https://stripe.com/docs/webhooks/signatures for more information.
