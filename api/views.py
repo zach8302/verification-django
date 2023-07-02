@@ -21,7 +21,6 @@ class VerifyView(APIView):
 class AuthenticateView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request: Request) -> Response:
-        print(request.user.date_verified)
         if request.user.verified:
             code = generate_code(6)
             hashed = hash_sha256(code)
