@@ -51,10 +51,10 @@ class VerificationWebhookView(APIView):
             )
         except ValueError as e:
             # Invalid payload.
-            return Response(status=400)
+            return Response({'Bad Request': 'Invalid Payload'}, status=400)
         except stripe.error.SignatureVerificationError as e:
             # Invalid Signature.
-            return Response(status=400)
+            return Response({'Bad Request': 'Invalid Signature'}, status=400)
 
         print(event)
         if event['type'] == 'identity.verification_session.verified':
