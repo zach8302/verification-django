@@ -31,7 +31,10 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+if os.getenv("DATABASE_URL", None) is None:
+    DEVELOPMENT_MODE = True
+else:
+    DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 
 # Application definition

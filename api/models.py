@@ -48,7 +48,6 @@ class User(AbstractUser):
 
     username = None
     email = models.EmailField(_('email address'), unique=True)
-    date_verified = models.DateTimeField(default=timezone.datetime.date(datetime.datetime(2000, 1, 1)))
     verified = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'

@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from django.utils.timezone import now
 import datetime
-from .models import AuthBlob
+from .models import AuthBlob, User
 from .services import generate_code, hash_sha256
 # Create your views here.
 
@@ -45,6 +45,7 @@ class IsAuthenticatedView(APIView):
                 return Response(data={"verified": True}, status=status.HTTP_200_OK)
 
         return Response(status=status.HTTP_401_UNAUTHORIZED)
+
 
 
 
