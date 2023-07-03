@@ -15,6 +15,7 @@ class IDVerificationView(APIView):
         coreapi = idanalyzer.CoreAPI(id_key, "US")
         coreapi.enable_authentication(True, 2)
         id_response = coreapi.scan(document_primary=url)
+
         try:
             id_result = id_response["result"]
             id_auth = id_response["authentication"]
@@ -22,11 +23,15 @@ class IDVerificationView(APIView):
             year = id_result["dob_year"]
             month = id_result["dob_month"]
             day = id_result["dob_day"]
-            age = datetime.timedelta(year=year, month=month, day=day)
+            dob = datetime.datetime(year=year, month=month, day=day)
+
+            now = datetime.datetime.now()
+            adult_dob = datetime.datetime(year=now.year - 18, month=now.month, day=now.day)
+
 
             auth_score = id_auth["score"]
 
-            if age > datetime.timedelta(years=18) and auth_score >= 0.5:
+            if dob < adult_dob and auth_score >= 0.5:
                 request.user.verified = True
                 request.user.save()
                 return Response(status=status.HTTP_200_OK)
