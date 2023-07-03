@@ -40,6 +40,7 @@ class VerificationWebhookView(APIView):
         signature = request.headers.get('stripe-signature')
         payload = request.data
         endpoint_secret = "whsec_zIdspvETnidcC0cgMzKUj3oaW12jyxvq"
+        
 
         # Verify webhook signature and extract the event.
         # See https://stripe.com/docs/webhooks/signatures for more information.
@@ -51,9 +52,11 @@ class VerificationWebhookView(APIView):
             )
         except ValueError as e:
             # Invalid payload.
+            print("payload")
             return Response({'Bad Request': 'Invalid Payload'}, status=400)
         except stripe.error.SignatureVerificationError as e:
             # Invalid Signature.
+            print("signature")
             return Response({'Bad Request': 'Invalid Signature'}, status=400)
 
         print(event)

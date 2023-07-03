@@ -2,6 +2,7 @@ from django.urls import path
 from .views import AuthenticateView, VerifyView, IsAuthenticatedView
 from .auth_views import MeView
 from .stripe_views import VerificationSessionView, VerificationWebhookView
+from .id_views import IDVerificationView
 
 urlpatterns = [
     path('authenticate', AuthenticateView.as_view()),
@@ -9,5 +10,6 @@ urlpatterns = [
     path('is-authenticated', IsAuthenticatedView.as_view()),
     path('me', MeView.as_view()),
     path('create-verification-session', VerificationSessionView.as_view()),
-    path('webhook', VerificationWebhookView.as_view())
+    path('webhook', VerificationWebhookView.as_view()),
+    path('id-verify', IDVerificationView.as_view())
     ]
