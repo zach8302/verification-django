@@ -11,7 +11,7 @@ class IDVerificationView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, format=None):
         
-        url = request.data.url
+        url = request.data.get("url")
         coreapi = idanalyzer.CoreAPI(id_key, "US")
         coreapi.enable_authentication(True, 2)
         id_response = coreapi.scan(document_primary=url)
